@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html ng-app>
+<style>
+    * {
+        box-sizing: border-box;
+        border-radius: 5px;
+        -webkit-border-radius: 5px;
+        -moz-border-radius: 5px;
+    }
+
+    body {
+        font: 16px/1.5 sans-serif;
+        color: #222;
+        margin: 5em;
+    }
+</style>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+
+<div>
+    <label for="nameID">Name:</label><input type="text" id="nameID" ng-model="name"/>
+</div>
+<div>
+    <input type="checkbox" id="showID" ng-model="checked"/> <label for="showID">Show?</label>
+</div>
+
+<div ng-show="checked">
+    Hello, {{name || "World"}}!
+</div>
+
+<div ng-hide="checked">
+    Hello again, {{name || "World"}}!
+</div>
+
+<script src="js/angular/1.2.16/angular.min.js"></script>
+<!--Place scripts below this line-->
+</body>
+</html>

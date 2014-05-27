@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html ng-app>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <script src="js/angular/1.2.16/angular.min.js"></script>
+    <title></title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            border-radius: 5px;
+            -webkit-border-radius: 5px;
+            -moz-border-radius: 5px;
+        }
+
+        body {
+            font: 16px/1.5 sans-serif;
+            color: #222;
+            margin: 5em;
+        }
+    </style>
+</head>
+
+<div>
+    <input type="search" ng-model="search">
+</div>
+<body>
+<div ng-controller="List">
+    <ul>
+        <li ng-repeat="person in people | filter:search">
+            {{person.name}} : {{person.age}}
+        </li>
+    </ul>
+
+    <div>
+        <label for="newName">Name:</label><input id="newName" ng-model="new_name">
+        <br>
+        <label for="newAge">Name:</label><input type="number" id="newAge" ng-model="new_age">
+        <br>
+        <button>Add</button>
+    </div>
+
+</div>
+<script>
+    var List = function ($scope) {
+        $scope.people = [
+            {name: "Tom", age: 20},
+            {name: "Jeffrey", age: 30},
+            {name: "Dan", age: 40},
+            {name: "David", age: 50},
+            {name: "Peter", age: 60}
+        ];
+    };
+</script>
+</body>
+</html>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <script src="js/angular/1.2.16/angular.min.js"></script>
+    <style>
+        * {
+            box-sizing: border-box
+        }
+
+        body {
+            font: 16px/1.5 sans-serif;
+            color: #222;
+            margin: 3em
+        }
+
+        .browser {
+            /*box-shadow: 0 2.5em 2.5em rgba(0, 0, 0.2), 0 0 1px rgba(0, 0, 0.2)*/
+            /*-webkit-box-shadow:inset 30px 15px 23px 23px #9E9E9E;*/
+            /*box-shadow:inset 30px 15px 23px 23px #9E9E9E;*/
+            box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
+
+        }
+
+        .url {
+            background: #eee;
+            padding: 0.444em 0.5em;
+        }
+
+        .url input {
+            width: 85%;
+        }
+
+        .url label {
+            display: inline-block;
+            width: 14%;
+            font-size: 0.667em;
+            text-align: center;
+        }
+
+        .page {
+            border: 1px solid #eeeeee;
+            padding: 2.5em;
+            min-height: 15em;
+        }
+
+        .page input {
+            width: 100%;
+        }
+    </style>
+    <title></title>
+</head>
+<body>
+
+<div ng-controller="Browser">
+    <div class="browser"></div>
+    <div class="url">
+        <label for="edit">&larr;&rarr;&infin;</label>
+        <input id="edit" value="edit/{{path}}">
+    </div>
+    <div class="page">
+        <label>Update the URL:</label>
+        <input  ng-change="clean()" ng-model="path">
+    </div>
+</div>
+
+<script>
+    angular.module('myApp', [])
+            .directive('watchChange', function () {
+                return {
+                    scope: {
+                        onchange: '&watchChange'
+                    },
+                    link: function (scope, element, attrs) {
+                        element.on('input', function () {
+                            scope.$apply(function () {
+                                scope.onchange();
+                            });
+                        });
+                    }
+                };
+            })
+            .controller("Browser", function ($scope) {
+                $scope.clean = function () {
+                    $scope.path = $scope.path
+                            .replace(/\s+/g, '-')
+                            .replace(/[^a-z0-9-]/i, '');
+                    console.log("path :: " + $scope.path);
+                }
+            });
+    //    var Browser = function ($scope) {
+    //        $scope.clean = function () {
+    //            $scope.path = $scope.path
+    //                    .replace(/\s+/g, '-')
+    //                    .replace(/[^a-z0-9]/i, '');
+    //            console.log("path :: " + $scope.path);
+    //        }
+    //    };
+</script>
+</body>
+</html>

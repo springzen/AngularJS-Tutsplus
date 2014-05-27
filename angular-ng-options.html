@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html ng-app>
+<head lang="en">
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="css/mystyle.css" media="screen">
+    <script src="js/angular/1.2.16/angular.min.js"></script>
+    <title></title>
+</head>
+<body>
+
+<div ng-controller="Contacts">
+    <div>
+        <input type="search" ng-model="search">
+    </div>
+
+    <div><select ng-model="selected_person"
+                 ng-options="person.name for person in people |filter:search">
+        <option value="">Choose a person:</option>
+    </select>
+        {{selected_person.name}}
+    </div>
+    <hr/>
+    <div>
+        <label>Name:</label><input ng-model="selected_person.name">
+        <label>Number:</label><input ng-model="selected_person.number">
+    </div>
+</div>
+
+
+<script>
+    var Contacts = function ($scope) {
+        $scope.people = [
+            {name: "Tom Ashworth", number: "1234567890"},
+            {name: "Jeffrey Way", number: "0987654321"},
+            {name: "Joe Bloggs", number: "1230984576"}
+        ]
+    };
+</script>
+</body>
+</html>

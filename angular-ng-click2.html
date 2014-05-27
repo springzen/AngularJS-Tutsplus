@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html ng-app>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <script src="js/angular/1.2.16/angular.min.js"></script>
+    <title></title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            border-radius: 5px;
+            -webkit-border-radius: 5px;
+            -moz-border-radius: 5px;
+        }
+
+        body {
+            font: 16px/1.5 sans-serif;
+            color: #222;
+            margin: 5em;
+        }
+
+        input {
+            display: inline-block;
+            float: left;
+        }
+
+        label {
+            display: inline-block;
+            float: left;
+            clear: left;
+            width: 55px;
+            text-align: left;
+        }
+
+        ul {
+            list-style-type: square;
+            list-style-position: inside;
+        }
+
+        li {
+            float: none;
+            margin-left: 25px;
+        }
+
+        button {
+            background-color: white;
+            color: black;
+        }
+
+        .first-true {
+            background-color: blue;
+            color: white;
+        }
+
+        table {
+            float: none;
+        }
+
+        .wrapword {
+            white-space: -moz-pre-wrap !important; /* Mozilla, since 1999 */
+            white-space: -pre-wrap; /* Opera 4-6 */
+            white-space: -o-pre-wrap; /* Opera 7 */
+            white-space: pre-wrap; /* css-3 */
+            word-wrap: break-word; /* Internet Explorer 5.5+ */
+            word-break: break-all;
+            white-space: normal;
+        }
+    </style>
+</head>
+
+<div>
+    <label for="searchID">Search:</label><input type="search" id="searchID" ng-model="search">
+</div>
+<body>
+<div ng-controller="List">
+    <!--<br>-->
+    <!--<ul>-->
+    <!--<li ng-repeat="person in people | filter:search">-->
+    <!--{{person.name}} : {{person.age}}-->
+    <!--<button class="first-{{$first}}" ng-click="remove($index)">x</button>-->
+    <!--<span ng-show="$first">1st</span>-->
+    <!--&lt;!&ndash;$last, $middle are the other offerings&ndash;&gt;-->
+    <!--</li>-->
+    <!--</ul>-->
+    <br/>
+    <br/>
+
+    <div>
+        <table id="peopleID" class="wrapword" align="left">
+            <tr>
+                <th>Name</th>
+                <th>Age</th>
+            </tr>
+            <tr ng-repeat="person in people | filter:search">
+                <td>{{ person.name}}</td>
+                <td>{{ person.age}}</td>
+                <td>
+                    <button class="first-{{$first}}" ng-click="remove($index)">x</button>
+                </td>
+            </tr>
+        </table>
+
+    </div>
+
+    <br/>
+    <span>There are {{people.length}} people in the list.</span>
+    <br/>
+    <br/>
+
+    <div>
+        <label for="newName">Name:</label><input id="newName" ng-model="new_name">
+        <br>
+        <label for="newAge">Age:</label><input type="number" id="newAge" ng-model="new_age">
+        <br>
+        <button ng-click="add()">Add</button>
+    </div>
+
+</div>
+<script>
+    var List = function ($scope) {
+        $scope.people = [
+            {name: "Tom", age: 20},
+            {name: "Jeffrey", age: 30},
+            {name: "Dan", age: 40},
+            {name: "David", age: 50},
+            {name: "Peter", age: 60}
+        ];
+
+        $scope.add = function () {
+            $scope.people.push({
+                name: $scope.new_name,
+                age: $scope.new_age
+            });
+            $scope.new_name = "";
+            $scope.new_age = "";
+        }
+
+        $scope.remove = function (index) {
+            $scope.people.splice(index, 1);
+        }
+    };
+</script>
+</body>
+</html>
